@@ -10,6 +10,7 @@ else
 	tar_path="/bin/tar"
 fi
 
+sudo /usr/bin/apt-get update
 sudo /usr/bin/apt-get install build-essential zlib1g-dev libssl-dev libpam0g-dev libedit-dev libaudit-dev dh-make devscripts
 if [[ ! -d ${build_dir} ]]
 then
