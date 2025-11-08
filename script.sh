@@ -3,7 +3,14 @@
 openssh_version='10.2p1'
 build_dir=$HOME/build_package
 
-sudo /usr/bin/apt-get install build-essential zlib1g-dev libssl-dev libpam0g-dev libedit-dev libaudit-dev
+if [[ -f /usr/bin/tar ]]
+then
+	tar_path="/usr/bin/tar"
+else
+	tar_path="/bin/tar"
+fi
+
+sudo /usr/bin/apt-get install build-essential zlib1g-dev libssl-dev libpam0g-dev libedit-dev libaudit-dev dh-make devscripts
 if [[ ! -d ${build_dir} ]]
 then
 	mkdir ${build_dir}
@@ -13,7 +20,7 @@ if [[ ! -f openssh-${openssh_version}.tar.gz ]]
 then
 	/usr/bin/wget https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${openssh_version}.tar.gz
 fi
-/usr/bin/tar -zxvf openssh-${openssh_version}.tar.gz
+${tar_path} -zxvf openssh-${openssh_version}.tar.gz
 cp openssh-${openssh_version}.tar.gz openssh_${openssh_version}.orig.tar.gz
 cd ${build_dir}/openssh-${openssh_version}
 /usr/bin/dh_make -y -s -f ../openssh-${openssh_version}.tar.gz
@@ -70,7 +77,7 @@ Source: openssh
 Section: unknown
 Priority: optional
 Maintainer: Esteban Monge <estebanmonge@riseup.net>
-Build-Depends: debhelper (>= 11), autotools-dev
+Build-Depends: debhelper (>= 10), autotools-dev
 Standards-Version: 4.1.3
 Homepage: <insert the upstream URL, if relevant>
 #Vcs-Browser: https://salsa.debian.org/debian/openssh
