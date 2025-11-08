@@ -25,8 +25,8 @@ I believe this is **not the best approach**, because vendors usually **backport 
 By simply patching servers “for sport” or just to **comply with a policy without proper feedback**, you may end up giving **attackers a clear signal** about which servers are potentially vulnerable. 🚨  
 
 But I think that strategy worked… **this repository is a proof of that.**
----
 
+---
 ## 🧩 Features
 - Built for **legacy Debian environments** (LTS and ELTS).  
 - **No PQC banner**, for a cleaner login experience.  
@@ -47,6 +47,7 @@ But I think that strategy worked… **this repository is a proof of that.**
 
 ```bash
 # Example for Debian 10 (Buster)
-sudo apt install ./openssh-server_9.9p1-legacy.deb
+sudo apt install ./openssh${version}.deb
+# Patch your systemd unit... you can find a script that do the same on the repository
 sudo systemctl restart ssh
 ```
